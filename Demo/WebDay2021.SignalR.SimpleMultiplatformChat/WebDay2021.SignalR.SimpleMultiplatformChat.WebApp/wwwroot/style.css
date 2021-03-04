@@ -1,0 +1,32 @@
+﻿.container {
+    margin: auto;
+    text-align: center;
+    width: 600px;
+}
+
+.connection {
+    margin: auto auto 20px auto;
+}
+
+    .connection #usernameInput {
+        width: 70%;
+        margin: auto 5px auto auto;
+    }
+
+.discussion #messageTextArea {
+    width: 90%;
+}
+
+.discussion #sendMessageButton {
+    vertical-align: top;
+    margin: 30px auto;
+}
+
+#discussionList {
+    height: 300px;
+    border: 1px solid #000000;
+    overflow: auto;
+    list-style-type: none;
+    text-align: left;
+    padding: 5px;
+}

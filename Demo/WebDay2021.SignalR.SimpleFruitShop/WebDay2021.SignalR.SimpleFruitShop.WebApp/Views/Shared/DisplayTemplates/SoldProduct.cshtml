@@ -1,0 +1,15 @@
+﻿@model SalesMonitorIndexViewModel.SoldProduct
+
+<tr id="product-@Model.Id">
+    <td>
+        <span>@Model.Name</span>
+        <br />
+        <img src="~/img/@(Model.Id).png" height="50" />
+    </td>
+    <td class="product-kg-sold">
+        @Model.TotalKgSold
+    </td>
+    <td class="product-total-revenue">
+        @Model.TotalRevenue
+    </td>
+</tr>

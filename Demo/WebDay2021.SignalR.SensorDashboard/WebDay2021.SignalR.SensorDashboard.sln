@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31019.35
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDay2021.SignalR.SensorDashboard.WebApp", "WebDay2021.SignalR.SensorDashboard.WebApp\WebDay2021.SignalR.SensorDashboard.WebApp.csproj", "{661EF109-E666-4D27-8878-26F3DBE95B06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDay2021.SignalR.SensorDashboard.SensorConsoleApp", "WebDay2021.SignalR.SensorDashboard.SensorConsoleApp\WebDay2021.SignalR.SensorDashboard.SensorConsoleApp.csproj", "{27071755-63D7-4F2A-8212-1F14F821D599}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{661EF109-E666-4D27-8878-26F3DBE95B06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{661EF109-E666-4D27-8878-26F3DBE95B06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{661EF109-E666-4D27-8878-26F3DBE95B06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{661EF109-E666-4D27-8878-26F3DBE95B06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27071755-63D7-4F2A-8212-1F14F821D599}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27071755-63D7-4F2A-8212-1F14F821D599}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27071755-63D7-4F2A-8212-1F14F821D599}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27071755-63D7-4F2A-8212-1F14F821D599}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9FA10F15-DC5E-4083-8ABB-479584EDD9F2}
+	EndGlobalSection
+EndGlobal

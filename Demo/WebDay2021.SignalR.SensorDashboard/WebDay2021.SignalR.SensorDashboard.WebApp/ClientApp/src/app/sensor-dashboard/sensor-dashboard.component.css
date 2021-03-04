@@ -1,0 +1,21 @@
+.sensor-row {
+    font-size: 30px;
+}
+
+  .sensor-row .measure-value {
+    font-weight: bolder;
+  }
+
+  .sensor-row .arrow {
+    font-weight: bolder;
+    font-size: 40px;
+    color: #0000FF;
+  }
+
+  .sensor-row .arrow-up {
+    color: #00FF00;
+  }
+
+  .sensor-row .arrow-down {
+    color: #FF0000;
+  }

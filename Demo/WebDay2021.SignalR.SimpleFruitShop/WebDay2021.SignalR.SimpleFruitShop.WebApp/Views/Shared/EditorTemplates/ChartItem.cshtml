@@ -1,0 +1,16 @@
+﻿@model HomeIndexViewModel.ChartItem
+
+<td>
+    <input asp-for="@Model.Id" type="hidden" />
+    <input asp-for="@Model.Name" type="hidden" />
+    <span>@Html.DisplayFor(model => model.Name)</span>
+    <br />
+    <img src="~/img/@(Model.Id).png" height="50" />
+</td>
+<td>
+    <input asp-for="@Model.PricePerKg" type="hidden" />
+    @Html.DisplayFor(model => model.PricePerKg)
+</td>
+<td>
+    <input asp-for="@Model.QuantityInKg" />
+</td>

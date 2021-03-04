@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Web Day 2021 - Simple SignalR Multiplatform Chat</title>
+    <link href="style.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h1>Web Day 2021 - Simple SignalR Multiplatform Chat</h1>
+
+        <div class="connection">
+            <input type="text" id="usernameInput" placeholder="Username" />
+            <input type="button" id="connectButton" value="Connetti" />
+            <input type="button" id="disconnectButton" value="Disconnetti" disabled="disabled" />
+        </div>
+
+        <div class="discussion">
+            <div>
+                <textarea id="messageTextArea" rows="5" placeholder="Scrivi il tuo messaggio..." disabled="disabled"></textarea>
+                <input type="button" id="sendMessageButton" value="Invia" disabled="disabled" />
+            </div>
+
+            <ul id="discussionList"></ul>
+        </div>
+
+        <div>
+            <span id="statusMessageSpan">Disconnesso.</span>
+        </div>
+    </div>
+    <script type="text/javascript" src="lib/microsoft-signalr/signalr.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            let usernameInput = document.getElementById('usernameInput');
+            let connectButton = document.getElementById('connectButton');
+            let disconnectButton = document.getElementById('disconnectButton');
+            let messageTextArea = document.getElementById('messageTextArea');
+            let sendMessageButton = document.getElementById('sendMessageButton');
+            let discussionList = document.getElementById('discussionList');
+            let statusMessageSpan = document.getElementById('statusMessageSpan');
+
+            const connection = new signalR.HubConnectionBuilder()
+                .withUrl('/chat')
+                .build();
+
+            function addMessageToList (username, message) {
+                let messageListItem = document.createElement('li');
+
+                messageListItem.innerHTML = '<strong>' + username + '</strong>:&nbsp;&nbsp;' + message;
+                discussionList.appendChild(messageListItem);
+            }
+
+            connectButton.addEventListener('click', async (event) => {
+                if (usernameInput.value) {
+                    statusMessageSpan.textContent = 'Connessione in corso...';
+
+                    connection.on('messageReceived', (username, message) => {
+                        addMessageToList(username, message);
+                    });
+
+                    await connection.start();
+
+                    sendMessageButton.addEventListener('click', async (event) => {
+                        if (messageTextArea.value) {
+                            await connection.invoke('sendMessage', usernameInput.value, messageTextArea.value);
+
+                            addMessageToList(usernameInput.value, messageTextArea.value);
+
+                            messageTextArea.value = '';
+                        } else {
+                            statusMessageSpan.textContent = 'Specificare un messaggio per inviarlo!';
+                        }
+                    });
+
+                    connectButton.setAttribute('disabled', 'disabled');
+                    disconnectButton.removeAttribute('disabled');
+                    messageTextArea.removeAttribute('disabled');
+                    sendMessageButton.removeAttribute('disabled');
+
+                    statusMessageSpan.textContent = 'Connesso...';
+                } else {
+                    statusMessageSpan.textContent = 'Specificare uno username per connettersi!';
+                }
+            });
+
+            disconnectButton.addEventListener('click', async (event) => {
+                await connection.stop();
+
+                connectButton.removeAttribute('disabled');
+                disconnectButton.setAttribute('disabled', 'disabled');
+                messageTextArea.setAttribute('disabled', 'disabled');
+                sendMessageButton.setAttribute('disabled', 'disabled');
+
+                statusMessageSpan.textContent = 'Disconnesso.';
+            });
+        })();
+    </script>
+</body>
+</html>

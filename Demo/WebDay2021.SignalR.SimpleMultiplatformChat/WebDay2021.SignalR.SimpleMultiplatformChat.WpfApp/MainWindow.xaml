@@ -1,0 +1,47 @@
+﻿<Window x:Class="WebDay2021.SignalR.SimpleMultiplatformChat.WpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WebDay2021.SignalR.SimpleMultiplatformChat.WpfApp"
+        mc:Ignorable="d"
+        Title="Web Day 2021 - Simple SignalR Multiplatform Chat" Height="450" Width="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" FontWeight="Bold" Text="Web Day 2021 - Simple SignalR Multiplatform Chat" />
+
+        <Grid Grid.Row="1" Margin="0 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="UsernameTextBox" Grid.Column="0" />
+            <!--<TextBox x:Name="UsernameTextBox" Grid.Column="0" />-->
+            <Button x:Name="ConnectButton" Grid.Column="1" Content="Connetti" Click="ConnectButton_Click" />
+            <Button x:Name="DisconnectButton" Grid.Column="2" Content="Disconnetti" Click="DisconnectButton_Click" IsEnabled="False" />
+        </Grid>
+
+        <Grid Grid.Row="2" Margin="0 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="MessageTextBox" Grid.Column="0" IsEnabled="False" />
+            <Button x:Name="SendMessageButton" Grid.Column="1" Content="Invia" Click="SendMessageButton_Click" IsEnabled="False" />
+        </Grid>
+
+        <ListBox x:Name="DiscussionListBox" Grid.Row="3"></ListBox>
+
+        <TextBlock x:Name="StatusMessagetextBlock"  Grid.Row="4" Text="Disconnesso." HorizontalAlignment="Center" />
+    </Grid>
+</Window>

@@ -1,0 +1,57 @@
+﻿@model WebDay2021.SignalR.SimpleFruitShop.WebApp.Models.SalesMonitorIndexViewModel
+
+@{
+    ViewData["Title"] = "Sales Monitor";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Web Day 2021 - Simple Fruit Shop : Sales Monitor</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="forecasts">
+    <thead>
+        <tr>
+            <th>Prodotto</th>
+            <th>Totale Venduto (Kg.)</th>
+            <th>Totale Ricavo (€)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Products.Count(); i++)
+        {
+             @Html.DisplayFor(model => model.Products[i])
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script type="text/javascript" src="~/lib/microsoft-signalr/signalr.min.js"></script>
+    <script type="text/javascript" src="~/lib/msgpack5/msgpack5.min.js"></script>
+    <script type="text/javascript" src="~/lib/microsoft/signalr-protocol-msgpack/dist/browser/signalr-protocol-msgpack.min.js"></script>
+    <script type="text/javascript">
+        (async function () {
+            const connection = new signalR.HubConnectionBuilder()
+                .withAutomaticReconnect()
+                // .withHubProtocol(new signalR.protocols.msgpack.MessagePackHubProtocol())
+                .withUrl('/admin/salesmonitor')
+                .build();
+
+            connection.on('ProductSold', (id, quantityInKg, pricePerKg) => {
+                let tableRow = document.getElementById(`product-${id}`);
+
+                let totalKgSoldColumn = tableRow.getElementsByClassName(`product-kg-sold`)[0];
+                let totalRevenueColumn = tableRow.getElementsByClassName(`product-total-revenue`)[0];
+
+                totalKgSoldColumn.innerHTML = (parseInt(totalKgSoldColumn.innerHTML) + quantityInKg).toString();
+                totalRevenueColumn.innerHTML = (parseFloat(totalRevenueColumn.innerHTML) + pricePerKg * quantityInKg).toFixed(2);
+            });
+
+            try {
+                await connection.start();
+            } catch (err) {
+                alert('Error, can\'t open the Hub connection!');
+            }
+        })();
+    </script>
+} 

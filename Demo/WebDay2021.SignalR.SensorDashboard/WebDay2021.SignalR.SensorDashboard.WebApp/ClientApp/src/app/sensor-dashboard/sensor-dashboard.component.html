@@ -1,0 +1,28 @@
+<h1>Sensor Dashboard</h1>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="sensors">
+  <thead>
+    <tr>
+      <th>SensorId</th>
+      <th>Temp. (C)</th>
+      <th>Trend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let sensor of sensors | keyvalue" class="sensor-row">
+      <td>
+        <span>{{ sensor.key }}</span>
+      </td>
+      <td>
+        <span *ngIf="sensor.value.length" class="measure-value">{{ (sensor.value[sensor.value.length - 1]).toFixed(2) }} &#176;C</span>
+        <span *ngIf="!sensor.value.length" class="measure-value">???</span>
+      </td>
+      <td>
+        <span *ngIf="(sensor.value.length && sensor.value.length >= 2) && (sensor.value[sensor.value.length - 1] > sensor.value[sensor.value.length - 2])" class="arrow arrow-up">&#10138;</span>
+        <span *ngIf="(sensor.value.length && sensor.value.length >= 2) && (sensor.value[sensor.value.length - 1] < sensor.value[sensor.value.length - 2])" class="arrow arrow-down">&#10136;</span>
+        <span *ngIf="(sensor.value.length && sensor.value.length >= 2) && (sensor.value[sensor.value.length - 1] == sensor.value[sensor.value.length - 2])" class="arrow">&#61;</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
